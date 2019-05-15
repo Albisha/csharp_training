@@ -1,8 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
@@ -16,7 +13,7 @@ public class TestBase
         protected IWebDriver driver;
         private StringBuilder verificationErrors;
         protected string baseURL;
-        private bool acceptNextAlert = true;
+        //private bool acceptNextAlert = true;
 
         [SetUp]
         public void SetupTest()
@@ -166,19 +163,7 @@ public class TestBase
             driver.FindElement(By.Name("byear")).SendKeys("1984");
             driver.FindElement(By.Name("aday")).Click();
 
-            /*  driver.FindElement(By.Name("bday")).Click();
-              new SelectElement(driver.FindElement(By.Name("bday"))).SelectByText(contact.Bday);
-              driver.FindElement(By.XPath("//option[@value='${contact.Bday}']")).Click();
 
-              driver.FindElement(By.Name("bmonth")).Click();
-              new SelectElement(driver.FindElement(By.Name("bmonth"))).SelectByText(contact.Bmonth);
-              driver.FindElement(By.XPath("//option[@value='${contact.Bmonth}']")).Click();
-
-              driver.FindElement(By.Name("byear")).Click();
-              driver.FindElement(By.Name("byear")).SendKeys(contact.Byear);
-              new SelectElement(driver.FindElement(By.Name("bmonth"))).SelectByText(contact.Byear);
-              driver.FindElement(By.XPath("//option[@value='${contact.Byear}']")).Click(); 
-           */
 
         }
       
