@@ -1,4 +1,5 @@
-﻿using NUnit.Framework;
+﻿using System;
+using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
@@ -18,6 +19,13 @@ namespace WebAddressbookTests
         {
 
             driver.FindElement(By.LinkText("add new")).Click();
+            return this;
+        }
+
+        public ContactHelper Remove(int v)
+        {
+            SelectContact(v);
+            RemoveContact();
             return this;
         }
 
@@ -120,5 +128,12 @@ namespace WebAddressbookTests
             return this;
         }
 
+
+        public ContactHelper RemoveContact()
+        {
+            driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            driver.SwitchTo().Alert().Accept();
+            return this;
+        }
     }
 }

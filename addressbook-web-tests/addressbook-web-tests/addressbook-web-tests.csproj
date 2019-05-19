@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ContactModificationTests.cs" />
+    <Compile Include="ContactRemovalTests.cs" />
     <Compile Include="GroupModificationTests.cs" />
     <Compile Include="model1\AccountData.cs" />
     <Compile Include="appmanager1\ApplicationManager.cs" />
