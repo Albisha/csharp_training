@@ -61,9 +61,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ContactModificationTests.cs" />
-    <Compile Include="ContactRemovalTests.cs" />
-    <Compile Include="GroupModificationTests.cs" />
+    <Compile Include="tests1\ContactModificationTests.cs" />
+    <Compile Include="tests1\ContactRemovalTests.cs" />
+    <Compile Include="tests1\GroupModificationTests.cs" />
     <Compile Include="model1\AccountData.cs" />
     <Compile Include="appmanager1\ApplicationManager.cs" />
     <Compile Include="appmanager1\ContactHelper.cs" />
