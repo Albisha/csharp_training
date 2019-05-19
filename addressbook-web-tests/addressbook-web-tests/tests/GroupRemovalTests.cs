@@ -1,4 +1,4 @@
-﻿
+﻿using System.Threading;
 using NUnit.Framework;
 
 
@@ -19,7 +19,6 @@ namespace WebAddressbookTests
             app.Groups.SelectGroup(1);
             app.Groups.RemoveGroup();
             app.Navigator.ReturnToGroupsPage();
-            app.Auth.Logout();
         }
 
     }

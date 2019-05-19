@@ -1,16 +1,15 @@
-﻿
+﻿using System.Threading;
 using NUnit.Framework;
 
 
 namespace WebAddressbookTests
 {
     [TestFixture]
-    public class GroupCreationTests:TestBase
+    public class GroupCreationTests : TestBase
     {
      
-
         [Test]
-        public void GroupCreationTest()
+        public  void GroupCreationTest()
         {
             app.Navigator.GoToHomePage();
             app.Auth.Login(new AccountData("admin", "secret"));
@@ -22,7 +21,6 @@ namespace WebAddressbookTests
             app.Groups.FillGroupForm(group);
             app.Groups.SubmitGroupCreation();
             app.Navigator.ReturnToGroupsPage();
-            app.Auth.Logout();
         }
    
 

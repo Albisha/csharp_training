@@ -1,18 +1,13 @@
-﻿using System;
-using System.Text;
+﻿
 using NUnit.Framework;
-using OpenQA.Selenium;
-using OpenQA.Selenium.Firefox;
-using OpenQA.Selenium.Support.UI;
+
 
 
 namespace WebAddressbookTests
 {
-public class TestBase
+public class TestBase 
     {
-      
         protected ApplicationManager app;
-
 
         [SetUp]
         public void SetupTest()
@@ -21,13 +16,11 @@ public class TestBase
         }
 
         [TearDown]
-        public void TeardownTest()
+        public void TearDownTest()
         {
             app.Stop();
-        
-        }
-       
-      
+                }
+
 
     }
 }

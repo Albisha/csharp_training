@@ -62,6 +62,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AccountData.cs" />
+    <Compile Include="ApplicationManager.cs" />
     <Compile Include="ContactHelper.cs" />
     <Compile Include="GroupHelper.cs" />
     <Compile Include="GroupRemovalTests.cs" />
