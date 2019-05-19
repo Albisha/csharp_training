@@ -2,12 +2,13 @@
 using NUnit.Framework;
 
 
-
 namespace WebAddressbookTests
 {
-public class TestBase 
+public class TestBase
     {
+      
         protected ApplicationManager app;
+
 
         [SetUp]
         public void SetupTest()
@@ -16,11 +17,13 @@ public class TestBase
         }
 
         [TearDown]
-        public void TearDownTest()
+        public void TeardownTest()
         {
             app.Stop();
-                }
-
+        
+        }
+       
+      
 
     }
 }

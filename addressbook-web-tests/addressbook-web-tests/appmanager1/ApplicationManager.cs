@@ -17,14 +17,12 @@ namespace WebAddressbookTests
         protected ContactHelper contactHelper;
 
         protected IWebDriver driver;
-        private StringBuilder verificationErrors;
         protected string baseURL;
 
         public ApplicationManager()
         {
             driver = new FirefoxDriver();
             baseURL = "http://localhost/";
-            verificationErrors = new StringBuilder();
             loginHelper = new LoginHelper(driver);
             navigator = new NavigationHelper(driver, baseURL);
             groupHelper = new GroupHelper(driver);
