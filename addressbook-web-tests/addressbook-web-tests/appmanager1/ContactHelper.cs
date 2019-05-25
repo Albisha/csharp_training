@@ -63,11 +63,11 @@ namespace WebAddressbookTests
             manager.Navigator.GoToHomePage();
             if (IsElementPresent(By.Name("entry")))
             {
-                SelectContact(v);
-                InitContactModification(v);
-                FillContactForm(newdata);
-                SubmitContactModification();
-                return this;
+             SelectContact(v);
+                  InitContactModification(v);
+                  FillContactForm(newdata);
+                  SubmitContactModification();
+                  return this;
             }
             InitContactCreation();
             ContactData contact = new ContactData("");
