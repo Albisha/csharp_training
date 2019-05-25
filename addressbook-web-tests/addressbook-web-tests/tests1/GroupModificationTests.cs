@@ -12,7 +12,8 @@ namespace WebAddressbookTests
     {
         [Test]
         public void GroupModificationTest()
-        {
+        {   AccountData correctaccount = new AccountData("admin", "secret");
+            app.Auth.Login(correctaccount);
             GroupData newdata = new GroupData("gr6");
             newdata.Header = "gr6header";
             newdata.Footer = "gr6footer";
