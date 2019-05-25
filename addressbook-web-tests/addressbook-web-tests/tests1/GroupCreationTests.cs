@@ -27,6 +27,7 @@ namespace WebAddressbookTests
             group.Header = "";
             group.Footer = "";
             app.Groups.Create(group);
+          
         }
     }
 }
