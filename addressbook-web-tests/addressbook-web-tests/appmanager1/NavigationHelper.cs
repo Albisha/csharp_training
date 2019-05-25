@@ -5,9 +5,9 @@ using OpenQA.Selenium.Support.UI;
 
 namespace WebAddressbookTests
 {
-   public class NavigationHelper:HelperBase
+    public class NavigationHelper : HelperBase
     {
-        
+
         private string baseURL;
 
         public NavigationHelper(ApplicationManager manager, string baseURL) : base(manager)
@@ -15,7 +15,7 @@ namespace WebAddressbookTests
             this.driver = driver;
             this.baseURL = baseURL;
         }
-       
+
         public void GoToHomePage()
         {
             driver.Navigate().GoToUrl(baseURL + "addressbook/");

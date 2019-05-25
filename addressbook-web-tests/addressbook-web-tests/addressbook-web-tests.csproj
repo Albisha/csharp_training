@@ -61,6 +61,8 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuthTestBase.cs" />
+    <Compile Include="LoginTests.cs" />
     <Compile Include="tests1\ContactModificationTests.cs" />
     <Compile Include="tests1\ContactRemovalTests.cs" />
     <Compile Include="tests1\GroupModificationTests.cs" />
@@ -78,7 +80,6 @@
     <Compile Include="tests1\GroupCreationTests.cs" />
     <Compile Include="tests1\ContactCreationTests.cs" />
     <Compile Include="tests1\TestBase.cs" />
-    <Compile Include="TestSuiteFixture.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="ClassDiagram2.cd" />
