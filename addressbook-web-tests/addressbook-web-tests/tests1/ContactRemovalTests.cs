@@ -17,7 +17,7 @@ namespace WebAddressbookTests
         {
             AccountData correctaccount = new AccountData("admin", "secret");
             app.Auth.Login(correctaccount);
-            app.Contact.Remove(1);
+            app.Contact.Remove(0);
          }
 
     }
