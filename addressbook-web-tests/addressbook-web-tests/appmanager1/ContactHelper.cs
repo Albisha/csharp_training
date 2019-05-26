@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
@@ -20,6 +21,33 @@ namespace WebAddressbookTests
 
             driver.FindElement(By.LinkText("add new")).Click();
             return this;
+        }
+
+        public List<ContactData> GetContactList()
+        {
+            manager.Navigator.GoToHomePage();
+            List<ContactData> contacts = new List<ContactData>();
+           
+       
+            ICollection<IWebElement> elements = driver.FindElements(By.XPath(".//tr[@name='entry']"));
+            int rowcount = 0; //driver.FindElements(By.XPath(".//tr[@name='entry']")).Count; 
+
+            foreach (IWebElement element in elements)
+            {
+              //  if (rowcount <= elements.Count)
+              //  { 
+                var firstname = element.FindElement(By.XPath("//*[@id='maintable']/tbody/tr[" + (rowcount + 2) + "]/td[3]"));
+             
+                    
+                var lastname = element.FindElement(By.XPath("//*[@id='maintable']/tbody/tr[" + (rowcount + 2) + "]/td[2]"));
+                   
+                contacts.Add(new ContactData(element.Text));
+                  
+                rowcount++;
+               // }              
+            }
+            return contacts;
+
         }
 
         public ContactHelper Remove(int v)
@@ -54,7 +82,7 @@ namespace WebAddressbookTests
 
             FillContactForm(contact);
             SubmitContactCreation();
-            manager.Auth.Logout();
+          
             return this;
         }
 
@@ -64,10 +92,10 @@ namespace WebAddressbookTests
             if (IsElementPresent(By.Name("entry")))
             {
              SelectContact(v);
-                  InitContactModification(v);
-                  FillContactForm(newdata);
-                  SubmitContactModification();
-                  return this;
+             InitContactModification(v);
+             FillContactForm(newdata);
+             SubmitContactModification();
+             return this;
             }
             InitContactCreation();
             ContactData contact = new ContactData("");
@@ -83,7 +111,7 @@ namespace WebAddressbookTests
 
         public ContactHelper FillContactForm(ContactData contact)
         {
-
+            //driver.FindElement(By.Name("firstname"));
             driver.FindElement(By.Name("firstname")).Clear();
             driver.FindElement(By.Name("firstname")).SendKeys(contact.Firstname);
             driver.FindElement(By.Name("middlename")).Clear();

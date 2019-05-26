@@ -14,12 +14,15 @@ namespace WebAddressbookTests
         {
             AccountData correctaccount = new AccountData("admin", "secret");
             app.Auth.Login(correctaccount);
+
             GroupData group = new GroupData("gr4");
             group.Header = "gr4header";
             group.Footer = "gr4footer";
+
             List<GroupData> oldgroups = app.Groups.GetGroupList();
             app.Groups.Create(group);
             List<GroupData> newgroups = app.Groups.GetGroupList();
+
             Assert.AreEqual(oldgroups.Count + 1, newgroups.Count);
         }
 
@@ -27,7 +30,9 @@ namespace WebAddressbookTests
 
         public void EmptyGroupCreationTest()
         {
-          
+            AccountData correctaccount = new AccountData("admin", "secret");
+            app.Auth.Login(correctaccount);
+
             GroupData group = new GroupData("");
             group.Header = "";
             group.Footer = "";

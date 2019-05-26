@@ -1,8 +1,10 @@
-﻿
+﻿using System.Collections.Generic;
+using System;
+
 
 namespace WebAddressbookTests
 {
-   public class ContactData
+   public class ContactData // : IEquatable<ContactData>
     {
         private string firstname;
         private string middlename = "";
@@ -259,5 +261,11 @@ namespace WebAddressbookTests
                 notes = value;
             }
         }
+
+       /* public int GetHashCode()
+        {
+            return Name.GetHashCode();
+        }*/
+
     }
 }
