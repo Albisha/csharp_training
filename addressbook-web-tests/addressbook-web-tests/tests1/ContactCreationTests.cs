@@ -37,10 +37,15 @@ namespace WebAddressbookTests
         {
             AccountData correctaccount = new AccountData("admin", "secret");
             app.Auth.Login(correctaccount);
+
+            List<ContactData> oldcontacts = app.Contact.GetContactList();
             app.Contact.InitContactCreation();
             ContactData contact = new ContactData("");
             app.Contact.Create(contact);
-    
+            List<ContactData> newcontacts = app.Contact.GetContactList();
+
+            Assert.AreEqual(oldcontacts.Count + 1, newcontacts.Count);
+
         }
 
     }

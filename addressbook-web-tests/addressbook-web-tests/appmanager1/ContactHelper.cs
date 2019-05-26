@@ -30,12 +30,11 @@ namespace WebAddressbookTests
            
        
             ICollection<IWebElement> elements = driver.FindElements(By.XPath(".//tr[@name='entry']"));
-            int rowcount = 0; //driver.FindElements(By.XPath(".//tr[@name='entry']")).Count; 
+            int rowcount = 0; 
 
             foreach (IWebElement element in elements)
             {
-              //  if (rowcount <= elements.Count)
-              //  { 
+              
                 var firstname = element.FindElement(By.XPath("//*[@id='maintable']/tbody/tr[" + (rowcount + 2) + "]/td[3]"));
              
                     
@@ -44,7 +43,7 @@ namespace WebAddressbookTests
                 contacts.Add(new ContactData(element.Text));
                   
                 rowcount++;
-               // }              
+                        
             }
             return contacts;
 
