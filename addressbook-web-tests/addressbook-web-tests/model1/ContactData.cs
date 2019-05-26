@@ -4,7 +4,7 @@ using System;
 
 namespace WebAddressbookTests
 {
-   public class ContactData // : IEquatable<ContactData>
+   public class ContactData : IEquatable<ContactData>
     {
         private string firstname;
         private string middlename = "";
@@ -262,10 +262,24 @@ namespace WebAddressbookTests
             }
         }
 
-       /* public int GetHashCode()
-        {
-            return Name.GetHashCode();
-        }*/
+          public bool Equals(ContactData other)
+         {
+             if (Object.ReferenceEquals(other, null))
+             {
+                 return false;
+             }
+             if (Object.ReferenceEquals(this, other))
+             {
+                 return true;
+             }
+             return Firstname == other.Firstname && Lastname == other.Lastname;
+           
+         }
+         
+         public int GetHashCode()
+         {
+             return Firstname.GetHashCode();
+         }
 
     }
 }

@@ -42,9 +42,10 @@
   <Class Name="WebAddressbookTests.ContactData" Collapsed="true">
     <Position X="10.5" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CAChAFAIwChAAGAoEABSAAAAUAQAAAAAABAgBEgQIwQ=</HashCode>
+      <HashCode>CAChAFAIwChAAGAokABSAAAAUAQAAIAAABAgBEgQIwQ=</HashCode>
       <FileName>model1\ContactData.cs</FileName>
     </TypeIdentifier>
+    <Lollipop Position="0.2" />
   </Class>
   <Class Name="WebAddressbookTests.AccountData" Collapsed="true">
     <Position X="10.5" Y="2" Width="1.5" />

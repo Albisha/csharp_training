@@ -15,11 +15,17 @@ namespace WebAddressbookTests
         {
             AccountData correctaccount = new AccountData("admin", "secret");
             app.Auth.Login(correctaccount);
+
+            List<ContactData> oldcontacts = app.Contact.GetContactList();
+
             ContactData newdata = new ContactData("1stName");
-            newdata.Middlename = "2Name";
             newdata.Lastname = "3Name";
-            newdata.Nickname = "4name";
             app.Contact.Modify(0, newdata);
+            List<ContactData> newcontacts = app.Contact.GetContactList();
+
+            Assert.AreNotEqual(oldcontacts.GetHashCode(), newcontacts.GetHashCode());
+
+            
            
 
         }
