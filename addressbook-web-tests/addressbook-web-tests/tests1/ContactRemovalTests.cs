@@ -17,8 +17,17 @@ namespace WebAddressbookTests
         {
             AccountData correctaccount = new AccountData("admin", "secret");
             app.Auth.Login(correctaccount);
+
+            List<ContactData> oldcontacts = app.Contact.GetContactList();
+
             app.Contact.Remove(0);
-         }
+
+            List<ContactData> newcontacts = app.Contact.GetContactList();
+            oldcontacts.RemoveAt(0);
+
+            Assert.AreEqual(oldcontacts, newcontacts);
+
+        }
 
     }
 }

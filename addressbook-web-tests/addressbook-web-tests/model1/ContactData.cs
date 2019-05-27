@@ -270,11 +270,15 @@ namespace WebAddressbookTests
              }
              if (Object.ReferenceEquals(this, other))
              {
-                 return true;
+                if (Firstname == other.Firstname)
+                {
+                    return Lastname == other.Lastname;
+                }
+                return true;
              }
              return Firstname == other.Firstname && Lastname == other.Lastname;
-           
-         }
+
+        }
          
          public int GetHashCode()
          {

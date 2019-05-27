@@ -28,7 +28,6 @@ namespace WebAddressbookTests
             manager.Navigator.GoToHomePage();
             List<ContactData> contacts = new List<ContactData>();
            
-       
             ICollection<IWebElement> elements = driver.FindElements(By.XPath(".//tr[@name='entry']"));
             int rowcount = 0; 
 
@@ -52,7 +51,7 @@ namespace WebAddressbookTests
         public ContactHelper Remove(int v)
         {
             manager.Navigator.GoToHomePage();
-
+  
             if (IsElementPresent(By.Name("entry")))
             {
                 SelectContact(v);
@@ -63,7 +62,7 @@ namespace WebAddressbookTests
             ContactData contact = new ContactData("");
             Create(contact);
             driver.FindElement(By.Name("entry"));
-            v = 1;
+            v = 0;
             SelectContact(v);
             RemoveContact();
             return this;
@@ -110,7 +109,7 @@ namespace WebAddressbookTests
 
         public ContactHelper FillContactForm(ContactData contact)
         {
-            //driver.FindElement(By.Name("firstname"));
+     
             driver.FindElement(By.Name("firstname")).Clear();
             driver.FindElement(By.Name("firstname")).SendKeys(contact.Firstname);
             driver.FindElement(By.Name("middlename")).Clear();

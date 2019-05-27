@@ -23,7 +23,7 @@ namespace WebAddressbookTests
             app.Contact.Modify(0, newdata);
             List<ContactData> newcontacts = app.Contact.GetContactList();
 
-            Assert.AreNotEqual(oldcontacts.GetHashCode(), newcontacts.GetHashCode());
+            Assert.AreNotEqual(oldcontacts, newcontacts);
 
             
            
