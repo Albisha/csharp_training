@@ -13,9 +13,8 @@ namespace WebAddressbookTests
         [Test]
         public void GroupRemovalTest()
         {
-            AccountData correctaccount = new AccountData("admin", "secret");
-            app.Auth.Login(correctaccount);
-            app.Groups.Remove(1);
+            app.Groups.Exists();
+            app.Groups.Remove(0);
         }
 
     }

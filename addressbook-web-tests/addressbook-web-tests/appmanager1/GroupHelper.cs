@@ -19,18 +19,6 @@ namespace WebAddressbookTests
         public GroupHelper Remove(int v)
         {
             manager.Navigator.GoToGroupsPage();
-
-            if (IsElementPresent(By.Name("selected[]")))
-            {
-                SelectGroup(v);
-                RemoveGroup();
-                manager.Navigator.ReturnToGroupsPage();
-                return this;
-            }
-            GroupData group = new GroupData("");
-            Create(group);
-            driver.FindElement(By.Name("selected[]"));
-            v = 1;
             SelectGroup(v);
             RemoveGroup();
             manager.Navigator.ReturnToGroupsPage();
@@ -41,31 +29,19 @@ namespace WebAddressbookTests
         public GroupHelper Modify(int v, GroupData newdata)
         {
             manager.Navigator.GoToGroupsPage();
-            if (IsElementPresent(By.Name("selected[]")))
-            {
-                SelectGroup(v);
-                InitGroupModification();
-                FillGroupForm(newdata);
-                SubmitGroupModification();
-                manager.Navigator.ReturnToGroupsPage();
-                return this;
-            }
-            GroupData group = new GroupData("");
-            Create(group);
-            driver.FindElement(By.Name("selected[]"));
-            v = 1;
             SelectGroup(v);
             InitGroupModification();
             FillGroupForm(newdata);
             SubmitGroupModification();
             manager.Navigator.ReturnToGroupsPage();
             return this;
+
         }
 
 
 
         public GroupHelper InitGroupCreation()
-        {
+        { 
             driver.FindElement(By.Name("new")).Click();
             return this;
         }
@@ -73,6 +49,7 @@ namespace WebAddressbookTests
         public GroupHelper Create(GroupData group)
         {
             manager.Navigator.GoToGroupsPage();
+
             InitGroupCreation();
             FillGroupForm(group);
             SubmitGroupCreation();
@@ -99,7 +76,7 @@ namespace WebAddressbookTests
 
         public GroupHelper SelectGroup(int index)
         {
-            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + index + "]")).Click();
+            driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index+1) + "]")).Click();
             return this;
         }
 
@@ -120,6 +97,15 @@ namespace WebAddressbookTests
         public GroupHelper SubmitGroupModification()
         {
             driver.FindElement(By.Name("update")).Click();
+            return this;
+        }
+        public GroupHelper Exists()
+        {
+            if (!IsElementPresent(By.Name("selected[]")))
+            {
+                GroupData newgroup = new GroupData("newgroup");
+                Create(newgroup);
+            }
             return this;
         }
 

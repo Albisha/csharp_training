@@ -11,9 +11,6 @@ namespace WebAddressbookTests
         [Test]
         public void ContactCreationTest()
         {
-            AccountData correctaccount = new AccountData("admin", "secret");
-            app.Auth.Login(correctaccount);
-            app.Contact.InitContactCreation();
             ContactData contact = new ContactData("FirstName");
             contact.Middlename = "MiddleName";
             contact.Lastname = "LastName";
@@ -27,9 +24,6 @@ namespace WebAddressbookTests
         [Test]
         public void EmptyContactCreationTest()
         {
-            AccountData correctaccount = new AccountData("admin", "secret");
-            app.Auth.Login(correctaccount);
-            app.Contact.InitContactCreation();
             ContactData contact = new ContactData("");
             app.Contact.Create(contact);
     

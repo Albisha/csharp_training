@@ -12,12 +12,12 @@ namespace WebAddressbookTests
     {
         [Test]
         public void GroupModificationTest()
-        {   AccountData correctaccount = new AccountData("admin", "secret");
-            app.Auth.Login(correctaccount);
+        {
+            app.Groups.Exists();
             GroupData newdata = new GroupData("gr6");
             newdata.Header = "gr6header";
             newdata.Footer = "gr6footer";
-            app.Groups.Modify(1, newdata);
+            app.Groups.Modify(0, newdata);
         }
     }
 }
