@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using NUnit.Framework;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Firefox;
@@ -19,6 +20,18 @@ namespace WebAddressbookTests
         public GroupHelper Remove(int v)
         {
             manager.Navigator.GoToGroupsPage();
+
+            if (IsElementPresent(By.Name("selected[]")))
+            {
+                SelectGroup(v);
+                RemoveGroup();
+                manager.Navigator.ReturnToGroupsPage();
+                return this;
+            }
+            GroupData group = new GroupData("");
+            Create(group);
+            driver.FindElement(By.Name("selected[]"));
+            v = 1;
             SelectGroup(v);
             RemoveGroup();
             manager.Navigator.ReturnToGroupsPage();
@@ -26,16 +39,40 @@ namespace WebAddressbookTests
 
         }
 
+        public List<GroupData> GetGroupList()
+        {
+            List<GroupData> groups = new List<GroupData>();
+            manager.Navigator.GoToGroupsPage();
+            ICollection<IWebElement> elements = driver.FindElements(By.CssSelector("span.group"));
+            foreach (IWebElement element in elements)
+            {
+                groups.Add(new GroupData(element.Text));
+            }
+            return groups;
+        }
+
         public GroupHelper Modify(int v, GroupData newdata)
         {
             manager.Navigator.GoToGroupsPage();
+            if (IsElementPresent(By.Name("selected[]")))
+            {
+                SelectGroup(v);
+                InitGroupModification();
+                FillGroupForm(newdata);
+                SubmitGroupModification();
+                manager.Navigator.ReturnToGroupsPage();
+                return this;
+            }
+            GroupData group = new GroupData("");
+            Create(group);
+            driver.FindElement(By.Name("selected[]"));
+            v = 1;
             SelectGroup(v);
             InitGroupModification();
             FillGroupForm(newdata);
             SubmitGroupModification();
             manager.Navigator.ReturnToGroupsPage();
             return this;
-
         }
 
 
