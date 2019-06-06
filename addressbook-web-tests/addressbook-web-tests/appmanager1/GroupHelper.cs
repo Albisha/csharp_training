@@ -62,7 +62,6 @@ namespace WebAddressbookTests
         public GroupHelper Create(GroupData group)
         {
             manager.Navigator.GoToGroupsPage();
-
             InitGroupCreation();
             FillGroupForm(group);
             SubmitGroupCreation();
@@ -84,6 +83,7 @@ namespace WebAddressbookTests
         public GroupHelper SubmitGroupCreation()
         {
             driver.FindElement(By.Name("submit")).Click();
+            driver.FindElement(By.Id("header"));
             return this;
         }
 
