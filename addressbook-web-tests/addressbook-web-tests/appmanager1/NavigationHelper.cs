@@ -18,10 +18,12 @@ namespace WebAddressbookTests
 
         public void GoToHomePage()
         {
-            if (driver.Url == baseURL + "addressbook/")
+            if (driver.Url == baseURL + "addressbook/"
+                &&IsElementPresent(By.Id("delete")))              
             { return;
             }
             driver.Navigate().GoToUrl(baseURL + "addressbook/");
+           
         }
 
 

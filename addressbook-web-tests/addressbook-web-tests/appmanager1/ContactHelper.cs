@@ -25,22 +25,18 @@ namespace WebAddressbookTests
 
         public List<ContactData> GetContactList()
         {
-            manager.Navigator.GoToHomePage();
-            List<ContactData> contacts = new List<ContactData>();
            
+            List<ContactData> contacts = new List<ContactData>();
+            manager.Navigator.GoToHomePage();           
             ICollection<IWebElement> elements = driver.FindElements(By.XPath(".//tr[@name='entry']"));
-            int rowcount = 0; 
-
+            int rowcount = 0;
+          
             foreach (IWebElement element in elements)
             {
               
-                var firstname = element.FindElement(By.XPath("//*[@id='maintable']/tbody/tr[" + (rowcount + 2) + "]/td[3]"));
-             
-                    
+                var firstname = element.FindElement(By.XPath("//*[@id='maintable']/tbody/tr[" + (rowcount + 2) + "]/td[3]"));                   
                 var lastname = element.FindElement(By.XPath("//*[@id='maintable']/tbody/tr[" + (rowcount + 2) + "]/td[2]"));
-                   
-                contacts.Add(new ContactData(element.Text));
-                  
+                contacts.Add(new ContactData(firstname.Text, lastname.Text));
                 rowcount++;
                         
             }
@@ -168,7 +164,7 @@ namespace WebAddressbookTests
         {
             if (!IsElementPresent(By.Name("selected[]")))
             {
-                ContactData newcontact = new ContactData("NewContact");                
+                ContactData newcontact = new ContactData("NewFirstN","NewLastN" );                
                 Create(newcontact);
             }
             return this;

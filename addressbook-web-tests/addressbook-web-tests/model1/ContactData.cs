@@ -4,7 +4,7 @@ using System;
 
 namespace WebAddressbookTests
 {
-   public class ContactData : IEquatable<ContactData>
+   public class ContactData : IEquatable<ContactData>, IComparable<ContactData>
     {
         private string firstname;
         private string middlename = "";
@@ -29,9 +29,10 @@ namespace WebAddressbookTests
 
 
 
-        public ContactData (string firstname)
+        public ContactData (string firstname, string lastname)
         {
             this.firstname = firstname;
+            this.lastname = lastname;
         }
 
         public string Firstname
@@ -270,20 +271,38 @@ namespace WebAddressbookTests
              }
              if (Object.ReferenceEquals(this, other))
              {
-                if (Firstname == other.Firstname)
-                {
-                    return Lastname == other.Lastname;
-                }
                 return true;
-             }
-             return Firstname == other.Firstname && Lastname == other.Lastname;
+            }
+
+             if (Lastname == other.Lastname)
+                {
+                    return Firstname == other.Firstname;
+                }
+          return Firstname == other.Firstname && Lastname == other.Lastname;
 
         }
          
-         public int GetHashCode()
+         public override int GetHashCode()
          {
-             return Firstname.GetHashCode();
+             return Lastname.GetHashCode();
          }
 
+         public int CompareTo(ContactData other)
+         {
+            if (Object.ReferenceEquals(other, null))
+            {
+                return 1;
+            }
+            if (Lastname == other.Lastname)
+            {
+                return Firstname.CompareTo(other.Firstname);
+            }
+            return Lastname.CompareTo(other.Lastname);
+         }
+
+        public override string ToString()
+        {
+            return "Firstname=" + Firstname +" Lastname " + Lastname;
+        }
     }
 }

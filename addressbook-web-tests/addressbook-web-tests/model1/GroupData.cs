@@ -4,7 +4,7 @@ using System;
 
 namespace WebAddressbookTests
 {
-  public  class GroupData : IEquatable<GroupData>
+  public  class GroupData : IEquatable<GroupData>, IComparable<GroupData>
     {
         private string name;
         private string header = "";
@@ -54,6 +54,15 @@ namespace WebAddressbookTests
 
         }
 
+        public int CompareTo(GroupData other)
+        {
+            if (Object.ReferenceEquals(other, null))
+            {
+                return 1;
+            }
+            return Name.CompareTo(other.Name);
+        }
+
         public bool Equals(GroupData other)
         {
             if (Object.ReferenceEquals(other, null))
@@ -67,9 +76,14 @@ namespace WebAddressbookTests
             return Name == other.Name;
         }
 
-        public int GetHashCode()
+        public override int GetHashCode()
         {
             return Name.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return "name=" + Name;
         }
     }
 }
