@@ -23,98 +23,151 @@ namespace WebAddressbookTests
             return this;
         }
 
+        public int GetContactCount()
+        {
+            manager.Navigator.GoToHomePage();
+            return driver.FindElements(By.XPath(".//tr[@name='entry']")).Count;
+        }
+
+        private List<ContactData> contactCashe = null;
+
         public List<ContactData> GetContactList()
         {
-           
-            List<ContactData> contacts = new List<ContactData>();
-            manager.Navigator.GoToHomePage();           
-            ICollection<IWebElement> elements = driver.FindElements(By.XPath(".//tr[@name='entry']"));
-       
-      //int linecount=0; - лишний счетчик, можно и без него найти ячейки
-            foreach (IWebElement element in elements)
-            { //найденные значения ячеек для фамилии и имени сразу добавляю  в контакты
-                contacts.Add(new ContactData(element.FindElement(By.XPath(".//td[3]")).Text, element.FindElement(By.XPath(".//td[2]")).Text));
-              /*
-               * contacts.Add(new ContactData(element.FindElement(By.XPath("//*[@id='maintable']/tbody/tr[" + (linecount + 2) + "]/td[3]")).Text, element.FindElement(By.XPath("//*[@id='maintable']/tbody/tr[" + (linecount + 2) + "]/td[2]")).Text));
-               * linecount++; */
+            if (contactCashe == null)
+            {
+                contactCashe = new List<ContactData>();
+                manager.Navigator.GoToHomePage();
+                ICollection<IWebElement> elements = driver.FindElements(By.XPath(".//tr[@name='entry']"));
+                foreach (IWebElement element in elements)
+                {
+                    contactCashe.Add(new ContactData(element.FindElement(By.XPath(".//td[3]")).Text, element.FindElement(By.XPath(".//td[2]")).Text)
+                    {
+                        Id = element.FindElement(By.TagName("input")).GetAttribute("value")
+                    });
+                }
+                  }
 
-            }
-            return contacts;
+                  return new List<ContactData>(contactCashe);
+              }
 
-        }
-   
 
-        public ContactHelper Remove(int v)
-        {
-            manager.Navigator.GoToHomePage();
-            driver.FindElement(By.Name("selected[]"));
-            SelectContact(v);
-            RemoveContact();
-            return this;
-        }
-
-        public ContactHelper SubmitContactCreation()
-        {
-
-            driver.FindElement(By.Name("submit")).Click();
-            return this;
-        }
-
-        public ContactHelper Create(ContactData contact)
-        {
-           manager.Navigator.GoToHomePage();
-            InitContactCreation();
-            FillContactForm(contact);
-            SubmitContactCreation();
-            return this;
-        }
-
-        public ContactHelper Modify(int v, ContactData newdata)
-        {
-            manager.Navigator.GoToHomePage();
+              public ContactHelper Remove(int v)
+              {
+                  manager.Navigator.GoToHomePage();
+                  driver.FindElement(By.Name("selected[]"));
                   SelectContact(v);
-                  InitContactModification(v);
-                  FillContactForm(newdata);
-                  SubmitContactModification();
+                  RemoveContact();
                   return this;
-        }
+              }
+
+              public ContactHelper SubmitContactCreation()
+              {
+
+                  driver.FindElement(By.Name("submit")).Click();
+                  contactCashe = null;
+                  return this;
+              }
+
+              public ContactHelper Create(ContactData contact)
+              {
+                 manager.Navigator.GoToHomePage();
+                  InitContactCreation();
+                  FillContactForm(contact);
+                  SubmitContactCreation();
+                  return this;
+              }
+
+              public ContactHelper Modify(int v, ContactData newdata)
+              {
+                  manager.Navigator.GoToHomePage();
+                        SelectContact(v);
+                        InitContactModification(v);
+                        FillContactForm(newdata);
+                        SubmitContactModification();
+                        return this;
+              }
 
         public ContactHelper FillContactForm(ContactData contact)
         {
+            if (contact.Firstname!=null)
+            {
+                driver.FindElement(By.Name("firstname")).Clear();
+                driver.FindElement(By.Name("firstname")).SendKeys(contact.Firstname);
+            }
+            if (contact.Lastname != null)
+            {
+                driver.FindElement(By.Name("lastname")).Clear();
+                driver.FindElement(By.Name("lastname")).SendKeys(contact.Lastname);
+            }
+                
+            if (contact.Middlename != null)
+            {
+                driver.FindElement(By.Name("middlename")).Clear();
+                driver.FindElement(By.Name("middlename")).SendKeys(contact.Middlename);
+            }
 
-            driver.FindElement(By.Name("firstname")).Clear();
-            driver.FindElement(By.Name("firstname")).SendKeys(contact.Firstname);
-            driver.FindElement(By.Name("middlename")).Clear();
-            driver.FindElement(By.Name("middlename")).SendKeys(contact.Middlename);
-            driver.FindElement(By.Name("lastname")).Clear();
-            driver.FindElement(By.Name("lastname")).SendKeys(contact.Lastname);
-            driver.FindElement(By.Name("nickname")).Clear();
-            driver.FindElement(By.Name("nickname")).SendKeys(contact.Nickname);
+            if (contact.Nickname != null)
+            {
+                driver.FindElement(By.Name("nickname")).Clear();
+                driver.FindElement(By.Name("nickname")).SendKeys(contact.Nickname);
+            }
 
-            driver.FindElement(By.Name("title")).Clear();
-            driver.FindElement(By.Name("title")).SendKeys(contact.Title);
-            driver.FindElement(By.Name("company")).Clear();
-            driver.FindElement(By.Name("company")).SendKeys(contact.Company);
-            driver.FindElement(By.Name("address")).Clear();
-            driver.FindElement(By.Name("address")).SendKeys(contact.CompanyAddress);
-            driver.FindElement(By.Name("home")).Clear();
-            driver.FindElement(By.Name("home")).SendKeys(contact.HomeTel);
-            driver.FindElement(By.Name("work")).Clear();
-            driver.FindElement(By.Name("work")).SendKeys(contact.WorkTel);
-            driver.FindElement(By.Name("mobile")).Clear();
-            driver.FindElement(By.Name("mobile")).SendKeys(contact.MobileTel);
-            driver.FindElement(By.Name("fax")).Clear();
-            driver.FindElement(By.Name("fax")).SendKeys(contact.Fax);
+            if (contact.Title != null)
+            {
+                driver.FindElement(By.Name("title")).Clear();
+                driver.FindElement(By.Name("title")).SendKeys(contact.Title);
+            }
+            if (contact.Company != null)
+            {
+                driver.FindElement(By.Name("company")).Clear();
+                driver.FindElement(By.Name("company")).SendKeys(contact.Company);
+            }
+            if (contact.CompanyAddress != null)
+            {
+                driver.FindElement(By.Name("address")).Clear();
+                driver.FindElement(By.Name("address")).SendKeys(contact.CompanyAddress);
+            }
+            if (contact.HomeTel != null)
+            {
+                driver.FindElement(By.Name("home")).Clear();
+                driver.FindElement(By.Name("home")).SendKeys(contact.HomeTel);
+            }
 
-            driver.FindElement(By.Name("email")).Clear();
-            driver.FindElement(By.Name("email")).SendKeys(contact.Email1);
-            driver.FindElement(By.Name("email2")).Clear();
-            driver.FindElement(By.Name("email2")).SendKeys(contact.Email2);
-            driver.FindElement(By.Name("email3")).Clear();
-            driver.FindElement(By.Name("email3")).SendKeys(contact.Email3);
-
-            driver.FindElement(By.Name("homepage")).Clear();
-            driver.FindElement(By.Name("homepage")).SendKeys(contact.Homepage);
+            if (contact.WorkTel != null)
+            {
+                driver.FindElement(By.Name("work")).Clear();
+                driver.FindElement(By.Name("work")).SendKeys(contact.WorkTel);
+            }
+            if (contact.MobileTel != null)
+            {
+                driver.FindElement(By.Name("mobile")).Clear();
+                driver.FindElement(By.Name("mobile")).SendKeys(contact.MobileTel);
+            }
+            if (contact.Fax != null)
+            {
+                driver.FindElement(By.Name("fax")).Clear();
+                driver.FindElement(By.Name("fax")).SendKeys(contact.Fax);
+            }
+            if (contact.Email1 != null)
+            {
+                driver.FindElement(By.Name("email")).Clear();
+                driver.FindElement(By.Name("email")).SendKeys(contact.Email1);
+            }
+            if (contact.Email2 != null)
+            {
+                driver.FindElement(By.Name("email2")).Clear();
+                driver.FindElement(By.Name("email2")).SendKeys(contact.Email2);
+            }
+            if (contact.Email3 != null)
+            {
+                driver.FindElement(By.Name("email3")).Clear();
+                driver.FindElement(By.Name("email3")).SendKeys(contact.Email3);
+            }
+            if (contact.Homepage !=null)
+            {
+                driver.FindElement(By.Name("homepage")).Clear();
+                driver.FindElement(By.Name("homepage")).SendKeys(contact.Homepage);
+            }
 
 
             /*   // fill birth date=14.06.1984
@@ -131,6 +184,7 @@ namespace WebAddressbookTests
             return this;
 
         }
+
         public ContactHelper SelectContact(int index)
         {
             driver.FindElement(By.XPath("(//input[@name='selected[]'])[" + (index + 1) + "]")).Click();
@@ -149,15 +203,17 @@ namespace WebAddressbookTests
         public ContactHelper SubmitContactModification()
         {
             driver.FindElement(By.Name("update")).Click();
+            contactCashe = null;
             return this;
         }
 
 
         public ContactHelper RemoveContact()
         {
-                driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
-                driver.SwitchTo().Alert().Accept();
-                return this;
+            driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
+            driver.SwitchTo().Alert().Accept();
+            contactCashe = null;
+            return this;
           
         }
         public ContactHelper Exists()
