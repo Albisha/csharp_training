@@ -29,20 +29,20 @@ namespace WebAddressbookTests
             List<ContactData> contacts = new List<ContactData>();
             manager.Navigator.GoToHomePage();           
             ICollection<IWebElement> elements = driver.FindElements(By.XPath(".//tr[@name='entry']"));
-            int rowcount = 0;
-          
+       
+      //int linecount=0; - лишний счетчик, можно и без него найти ячейки
             foreach (IWebElement element in elements)
-            {
-              
-                var firstname = element.FindElement(By.XPath("//*[@id='maintable']/tbody/tr[" + (rowcount + 2) + "]/td[3]"));                   
-                var lastname = element.FindElement(By.XPath("//*[@id='maintable']/tbody/tr[" + (rowcount + 2) + "]/td[2]"));
-                contacts.Add(new ContactData(firstname.Text, lastname.Text));
-                rowcount++;
-                        
+            { //найденные значения ячеек для фамилии и имени сразу добавляю  в контакты
+                contacts.Add(new ContactData(element.FindElement(By.XPath(".//td[3]")).Text, element.FindElement(By.XPath(".//td[2]")).Text));
+              /*
+               * contacts.Add(new ContactData(element.FindElement(By.XPath("//*[@id='maintable']/tbody/tr[" + (linecount + 2) + "]/td[3]")).Text, element.FindElement(By.XPath("//*[@id='maintable']/tbody/tr[" + (linecount + 2) + "]/td[2]")).Text));
+               * linecount++; */
+
             }
             return contacts;
 
         }
+   
 
         public ContactHelper Remove(int v)
         {
