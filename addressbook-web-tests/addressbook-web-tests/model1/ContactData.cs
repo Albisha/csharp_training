@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System;
-//using System.Text.RegularExpressions;
+using System.Text.RegularExpressions;
 
 namespace WebAddressbookTests
 {
@@ -77,8 +77,8 @@ namespace WebAddressbookTests
             {
                 return "";
             }
-           // return Regex.Replace(phone,"[- ()]","")+"\r\n";
-            return phone.Replace(" ","").Replace("-","").Replace("(","").Replace(")","") +"\r\n";
+           return Regex.Replace(phone,"[- ()]","")+"\r\n";
+           // return phone.Replace(" ","").Replace("-","").Replace("(","").Replace(")","") +"\r\n";
         }
 
         public bool Equals(ContactData other)
