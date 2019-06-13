@@ -46,7 +46,7 @@ namespace WebAddressbookTests
                 }
                 else
                 {
-                    return (Email1 + "\r\n" + Email2 + "\r\n" + Email3 + "\r\n").Trim();
+                    return (Clean(Email1) + Clean(Email2) + Clean(Email3)).Trim();
                 }
             }
         
@@ -78,7 +78,17 @@ namespace WebAddressbookTests
                 return "";
             }
            return Regex.Replace(phone,"[- ()]","")+"\r\n";
-           // return phone.Replace(" ","").Replace("-","").Replace("(","").Replace(")","") +"\r\n";
+
+        }
+
+        private string Clean(string email)
+        {
+            if (email == null || email == "")
+            {
+                return "";
+            }
+            return Regex.Replace(email, "[ ]", "") + "\r\n";
+            // return phone.Replace(" ","").Replace("-","").Replace("(","").Replace(")","") +"\r\n";
         }
 
         public bool Equals(ContactData other)
