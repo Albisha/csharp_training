@@ -9,8 +9,6 @@ namespace WebAddressbookTests
 {
     public class ContactHelper : HelperBase
     {
-
-
         public ContactHelper(ApplicationManager manager) : base(manager)
         {
             this.driver = driver;
@@ -70,7 +68,7 @@ namespace WebAddressbookTests
                 allPhones += "F: " + CleanData(contact.Fax);
             }
          
-            //проверка только на Middlename, исхояд из предполажения что фамилия и имя указаны
+            //проверка только на Middlename, предполагается что фамилия и имя указаны
             if (contact.Middlename =="" || contact.Middlename == null)
             {
                 fullName = contact.Firstname.Trim() + " "
