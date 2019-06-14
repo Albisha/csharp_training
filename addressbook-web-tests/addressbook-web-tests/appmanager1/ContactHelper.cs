@@ -37,6 +37,57 @@ namespace WebAddressbookTests
 
             }
 
+        public string GetContactInformationFromDetails(int index)
+        {
+            manager.Navigator.GoToHomePage();
+            SelectContact(index);
+            ClickDetails();
+            string detailsInfo = driver.FindElement(By.XPath("//*[@id='content']")).Text;
+            return detailsInfo;
+        }
+
+        public string PreparedContactInformationFromEditForm(ContactData contact)
+        {
+            string preparedData;
+            string allPhones = "";
+            string fullName= contact.Firstname.Trim() + " "
+                           + contact.Middlename.Trim() + " "
+                           + contact.Lastname.Trim() + "\r\n";
+            if (CleanData(contact.HomePhone) != "")
+            {
+                allPhones += "H: "+CleanData(contact.HomePhone);
+            }
+            if (CleanData(contact.MobilePhone) != "")
+            {
+                allPhones += "M: " + CleanData(contact.MobilePhone);
+            }
+            if (CleanData(contact.WorkPhone) != "")
+            {
+                allPhones += "W: " + CleanData(contact.WorkPhone);
+            }
+            if (CleanData(contact.Fax) != "")
+            {
+                allPhones += "F: " + CleanData(contact.Fax);
+            }
+         
+            //проверка только на Middlename, исхояд из предполажения что фамилия и имя указаны
+            if (contact.Middlename =="" || contact.Middlename == null)
+            {
+                fullName = contact.Firstname.Trim() + " "
+                  + contact.Lastname.Trim() + "\r\n";
+            }           
+            preparedData = fullName
+                + CleanData(contact.Nickname)
+                + CleanData(contact.Title)
+                + CleanData(contact.Company)
+                + CleanData(contact.Address)
+                + allPhones
+                + contact.AllEmails;
+            return preparedData;
+        }
+
+   
+
         public ContactData GetContactInformationFromEditForm(int index)
         {
             manager.Navigator.GoToHomePage();
@@ -285,6 +336,21 @@ namespace WebAddressbookTests
                 Create(newcontact);
             }
             return this;
+        }
+
+        public ContactHelper ClickDetails()
+        {
+            driver.FindElement(By.XPath("//img[@alt='Details']")).Click();
+            return this;
+        }
+
+        public string CleanData(string somedata)
+        {
+            if (somedata == "" || somedata == null)
+           {
+                return "";
+           }
+            return somedata.Trim()+"\r\n";
         }
     }
 }
