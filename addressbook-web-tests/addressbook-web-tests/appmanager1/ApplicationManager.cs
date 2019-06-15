@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using OpenQA.Selenium;
+using OpenQA.Selenium.Chrome;
 using OpenQA.Selenium.Firefox;
 using OpenQA.Selenium.Support.UI;
 
@@ -23,7 +24,7 @@ namespace WebAddressbookTests
 
         private ApplicationManager()
         {
-            driver = new FirefoxDriver();
+            driver = new ChromeDriver();
             baseURL = "http://localhost/";
             driver.Manage().Timeouts().ImplicitWait = TimeSpan.FromSeconds(4);
 
