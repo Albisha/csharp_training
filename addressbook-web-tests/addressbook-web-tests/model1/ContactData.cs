@@ -15,6 +15,10 @@ namespace WebAddressbookTests
             Firstname = firstName;
             Lastname = lastName;
         }
+        public ContactData()
+        {
+            //для сериализатора
+        }
 
         public ContactData(string detailsInfo)
         {
