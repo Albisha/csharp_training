@@ -25,8 +25,8 @@ public class TestBase
             StringBuilder builder = new StringBuilder();
             for (int i = 0; i < l; i++)
             {
-              // builder.Append((char)rnd.Next(65, 91)); //для генерации строк из [A..Z]
-              builder.Append(Convert.ToChar(32+Convert.ToInt32(rnd.NextDouble()*65)));
+                builder.Append((char)rnd.Next(28, 127)+ (char)rnd.Next(21, 27)); //для генерации строк без ', для проверки бага оставила тест соответствующий
+               // builder.Append(Convert.ToChar(32+Convert.ToInt32(rnd.NextDouble()*65)));
             }
             return builder.ToString();
         }
