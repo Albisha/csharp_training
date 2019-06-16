@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using WebAddressbookTests;
 using System.Xml;
 using System.Xml.Serialization;
+using Newtonsoft.Json;
 
 namespace addressbook_test_data_generators
 {
@@ -101,7 +102,9 @@ namespace addressbook_test_data_generators
         }
        
         static void writeGroupsToJsonFile(List<GroupData> groups, StreamWriter writer)
-        { }
+        {
+            writer.Write(JsonConvert.SerializeObject(groups, Newtonsoft.Json.Formatting.Indented));
+        }
         static void writeGroupsToExcelFile(List<GroupData> groups, StreamWriter writer)
         { }
 
@@ -120,7 +123,9 @@ namespace addressbook_test_data_generators
         }
 
         static void writeContactsToJsonFile(List<ContactData> contacts, StreamWriter writer)
-        { }
+        {
+            writer.Write(JsonConvert.SerializeObject(contacts, Newtonsoft.Json.Formatting.Indented));
+        }
         static void writeContactsToExcelFile(List<ContactData> contact, StreamWriter writer)
         { }
     }
