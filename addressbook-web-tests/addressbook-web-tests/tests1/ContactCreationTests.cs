@@ -1,5 +1,6 @@
 ﻿
 using System.Collections.Generic;
+using System.IO;
 using NUnit.Framework;
 
 
@@ -18,7 +19,19 @@ namespace WebAddressbookTests
             return contacts;
         }
 
-        [Test, TestCaseSource("RandomContactDataProvider")]
+        public static IEnumerable<ContactData> RandomContactDataFromCsvFile()
+        {
+            List<ContactData> contacts = new List<ContactData>();
+            string[] lines = File.ReadAllLines(@"contact.csv");
+            foreach (string l in lines)
+            {
+                string[] parts = l.Split(',');
+                contacts.Add(new ContactData(parts[0], parts[1]));                
+            }
+            return contacts;
+        }
+
+        [Test, TestCaseSource("RandomContactDataFromCsvFile")]
         public void ContactCreationTest(ContactData contact)
         {
             List<ContactData> oldContact = app.Contact.GetContactList();
