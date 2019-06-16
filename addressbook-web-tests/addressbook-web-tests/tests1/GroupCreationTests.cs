@@ -54,9 +54,9 @@ namespace WebAddressbookTests
             oldgroups.Sort();
             newgroups.Sort();
             Assert.AreEqual(oldgroups, newgroups);
-        }*/
+        }
 
-     /*   [Test]
+       [Test]
 
         public void BadGroupCreationTest()
         {

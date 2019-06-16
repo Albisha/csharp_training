@@ -14,7 +14,6 @@ public class TestBase
         public void SetupApplicationManager()
         {
            app = ApplicationManager.GetInstance();
-          // app.Auth.Login(new AccountData("admin", "secret"));
         }
 
         public static Random rnd = new Random();
@@ -23,12 +22,11 @@ public class TestBase
         {
 
             int l = Convert.ToInt32(rnd.NextDouble() * max);
-           // char[] randomWord = new char[l];
             StringBuilder builder = new StringBuilder();
             for (int i = 0; i < l; i++)
             {
-                //randomWord[i] = (char)rnd.Next(65, 91);
-                builder.Append(Convert.ToChar(32+Convert.ToInt32(rnd.NextDouble()*223)));
+               // builder.Append((char)rnd.Next(65, 91)); для генерации строк из [A..Z]
+               builder.Append(Convert.ToChar(32+Convert.ToInt32(rnd.NextDouble()*223)));
             }
             return builder.ToString();
         }
