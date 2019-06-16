@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using NUnit.Framework;
+using Newtonsoft.Json;
 
 
 namespace WebAddressbookTests
@@ -30,8 +31,13 @@ namespace WebAddressbookTests
             }
             return contacts;
         }
+        public static IEnumerable<ContactData> RandomContactDataFromJsonFile()
+        {
+            return JsonConvert.DeserializeObject<List<ContactData>>(
+                File.ReadAllText(@"contacts.json"));
+        }
 
-        [Test, TestCaseSource("RandomContactDataFromCsvFile")]
+        [Test, TestCaseSource("RandomContactDataFromJsonFile")]
         public void ContactCreationTest(ContactData contact)
         {
             List<ContactData> oldContact = app.Contact.GetContactList();
