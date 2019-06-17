@@ -44,7 +44,7 @@ namespace addressbook_test_data_generators
                 {
                     writeGroupsToJsonFile(groups, writer);
                 }
-                else if (format == "xls" || format == "xlsx")
+                else if (format == "excel")
                 {
                     writeGroupsToExcelFile(groups, writer);
                 }
@@ -74,7 +74,7 @@ namespace addressbook_test_data_generators
                     {
                         writeContactsToJsonFile(contact, writer);
                     }
-                    else if (format == "xls" || format == "xlsx")
+                    else if (format == "excel")
                     {
                         writeContactsToExcelFile(contact, writer);
                     }
