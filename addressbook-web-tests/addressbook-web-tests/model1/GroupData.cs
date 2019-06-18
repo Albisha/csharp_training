@@ -21,6 +21,7 @@ namespace WebAddressbookTests
         {
           //конструктор для сериалайзера 
         }
+
         [Column(Name = "group_name")]
         public string Name { get; set;}
         [Column(Name = "group_header")]

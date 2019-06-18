@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using NUnit.Framework;
 using Newtonsoft.Json;
-
+using System;
 
 namespace WebAddressbookTests
 {
@@ -50,21 +50,36 @@ namespace WebAddressbookTests
             newContact.Sort();
             Assert.AreEqual(oldContact, newContact);
         }
-/*
-        [Test]
-        public void EmptyContactCreationTest()
-        {
-            List<ContactData> oldContact = app.Contact.GetContactList();
-            ContactData contact = new ContactData("", "");
-            app.Contact.Create(contact);
-            Assert.AreEqual(oldContact.Count + 1, app.Contact.GetContactCount());
+        /*
+                [Test]
+                public void EmptyContactCreationTest()
+                {
+                    List<ContactData> oldContact = app.Contact.GetContactList();
+                    ContactData contact = new ContactData("", "");
+                    app.Contact.Create(contact);
+                    Assert.AreEqual(oldContact.Count + 1, app.Contact.GetContactCount());
 
-            List<ContactData> newContact = app.Contact.GetContactList();
-            oldContact.Add(contact);
-            oldContact.Sort();
-            newContact.Sort();
-            Assert.AreEqual(oldContact, newContact);
-        } */
+                    List<ContactData> newContact = app.Contact.GetContactList();
+                    oldContact.Add(contact);
+                    oldContact.Sort();
+                    newContact.Sort();
+                    Assert.AreEqual(oldContact, newContact);
+                } */
+
+        [Test]
+        public void TestDBConnectivityToContact()
+        {
+            DateTime start = DateTime.Now;
+            List<ContactData> oldContact = app.Contact.GetContactList();
+            DateTime end = DateTime.Now;
+            System.Console.Out.WriteLine(end.Subtract(start));
+
+            start = DateTime.Now;
+            List<ContactData> fromDB = ContactData.GetAll();
+            end = DateTime.Now;
+            System.Console.Out.WriteLine(end.Subtract(start));
+
+        }
 
     }
 }
