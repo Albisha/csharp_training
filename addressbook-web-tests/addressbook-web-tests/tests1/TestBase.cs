@@ -7,7 +7,11 @@ using NUnit.Framework;
 namespace WebAddressbookTests
 {
 public class TestBase
-    {      
+    {
+       public static bool PERFORM_LONG_UI_CHEKS = false; // отключаемая проверка, которая выполняется после каждого теста, и проверяет, что данные в пользовательском интерфейсе согласуются с тем, что получено из базы данных.
+
+
+
         protected ApplicationManager app;
 
       [SetUp]
