@@ -15,6 +15,8 @@ namespace WebAddressbookTests
             GroupData group = GroupData.GetAll()[0];
             List<ContactData> oldList = group.GetContacts();
             ContactData contact = ContactData.GetAll().Except(oldList).First();
+       
+
             //actions
             app.Contact.AddContactToGrooup(contact, group);
 
@@ -25,6 +27,7 @@ namespace WebAddressbookTests
             newList.Sort();
             Assert.AreEqual(oldList, newList);
         }
+
 
     }
 }

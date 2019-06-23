@@ -35,13 +35,45 @@ namespace WebAddressbookTests
 
             }
 
-        internal void AddContactToGrooup(ContactData contact, GroupData group)
+        public void RemoveContactFromGroup(ContactData contact, GroupData group)
+        {
+            manager.Navigator.GoToHomePage();
+            SetGroupFilter(group.Name);
+            SelectContact(contact.Id);
+         
+            RemoveFromGroup(group.Name);
+
+            new WebDriverWait(driver, TimeSpan.FromSeconds(10))
+               .Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
+        }
+
+        private void SetGroupFilter(string group)
+        {
+            new SelectElement(driver.FindElement(By.Name("group"))).SelectByText(group);
+        }
+
+        public ContactHelper RemoveFromGroup(string groupname)
+        {
+            driver.FindElement(By.XPath("//input[@name='remove']")).Click();
+            return this;
+        }
+
+        private void ClickToGroupLink(string name)
+        {
+           
+            driver.FindElement(By.LinkText(name)).Click();
+        }
+
+        public void AddContactToGrooup(ContactData contact, GroupData group)
         {
             manager.Navigator.GoToHomePage();
             ClearGroupFilter();
             SelectContact(contact.Id);
             SelectGroupToAdd(group.Name);
             CommitAddingContactToGroup();
+
+            new WebDriverWait(driver, TimeSpan.FromSeconds(10))
+               .Until(d => d.FindElements(By.CssSelector("div.msgbox")).Count > 0);
 
         }
 
@@ -380,8 +412,7 @@ namespace WebAddressbookTests
             driver.FindElement(By.XPath("//input[@value='Delete']")).Click();
             driver.SwitchTo().Alert().Accept();
             contactCashe = null;
-            return this;
-          
+            return this;          
         }
         public ContactHelper Exists()
         {

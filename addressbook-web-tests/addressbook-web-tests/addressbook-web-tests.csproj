@@ -87,6 +87,7 @@
     <Compile Include="LoginTests.cs" />
     <Compile Include="model1\AddressbookDB.cs" />
     <Compile Include="model1\GroupContactRelation.cs" />
+    <Compile Include="RemoveContactFromGroupTests.cs" />
     <Compile Include="tests1\ContactInformationTests.cs" />
     <Compile Include="tests1\ContactModificationTests.cs" />
     <Compile Include="tests1\ContactRemovalTests.cs" />
@@ -107,7 +108,9 @@
     <Compile Include="tests1\TestBase.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="ClassDiagram2.cd" />
     <None Include="contacts.csv">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
