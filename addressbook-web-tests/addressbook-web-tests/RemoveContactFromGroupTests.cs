@@ -12,40 +12,51 @@ namespace WebAddressbookTests
         [Test]
         public void DeleteContactFromGroupTest()
         {
-            bool notinGroup =true;
-            bool inGroup = false;
-            List<GroupData> groupsList = GroupData.GetAll(); //список всех групп 
-            int i = 0;
-            int count = groupsList.Count();
-            List<ContactData> contacts = ContactData.GetAll(); //список всех контактов без удаленных
-            GroupData groupWithContact = new GroupData(""); ;
+            GroupData groupWithContact = new GroupData("0");
+            bool notinGroup = true;
+            bool findGroup = false;
+            int i = 0; int j = 0;
 
-           while (i < count && notinGroup)
-            
-            {
-                List<ContactData> contactListInGroup = groupsList[i].GetContacts();
-                if (contactListInGroup != null)
+            app.Contact.IsContactExists();
+            app.Groups.IsGroupExists();
+
+            List<GroupData> groupsList = GroupData.GetAll();
+            List<ContactData> contacts = ContactData.GetAll();
+
+            int contactsCount = contacts.Count();
+            int groupsCount = groupsList.Count;
+
+            while (i < groupsCount && !findGroup)
+            { 
+                while (j < contactsCount && notinGroup)
+
                 {
+                    List<ContactData> contactListInGroup = groupsList[i].GetContacts();
+                    if (contactListInGroup.Count() != 0)
+                    {
+                        contacts = contactListInGroup; 
+                    }
+                    else //если у группы нет контактов, то добаляем в группу контакт
+                    {
+                        app.Contact.AddContactToGrooup(contacts[0], groupsList[i]);
+
+                    }
                     notinGroup = false;
-                    inGroup = true;
+                    findGroup = true;
                     groupWithContact = groupsList[i];
-                    contacts = contactListInGroup; //список контактов в группе i
-                }
-                else
-                {
-                    notinGroup = true;
-                }
+                    j++;
+                 }
+
                 i++;
-                                  
-            }
-            if (inGroup)
+             }
+
+            if (findGroup)
             {
-                List<ContactData> oldList = contacts;
-                foreach (ContactData contact in contacts)
-                {
-                    app.Contact.RemoveContactFromGroup(contact, groupWithContact);
-                    oldList.Remove(contact);
-                }
+                 List<ContactData> oldList = contacts;
+
+                      app.Contact.RemoveContactFromGroup(contacts[0], groupWithContact);
+                      oldList.Remove(contacts[0]);
+
                 List<ContactData> newList = groupWithContact.GetContacts();
                 oldList.Sort();
                 newList.Sort();

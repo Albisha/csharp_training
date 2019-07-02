@@ -35,6 +35,18 @@ namespace WebAddressbookTests
 
             }
 
+
+
+        public ContactHelper IsContactExists(ContactData contact)
+        {
+            if (contact == null)
+            {
+                ContactData newcontact = new ContactData("Firstname12","Lastname12");
+                Create(newcontact);
+            }
+            return this;
+        }
+
         public void RemoveContactFromGroup(ContactData contact, GroupData group)
         {
             manager.Navigator.GoToHomePage();
@@ -437,6 +449,19 @@ namespace WebAddressbookTests
                 return "";
            }
             return somedata.Trim()+"\r\n";
+        }
+
+        public ContactHelper IsContactExists()
+        {
+            List<ContactData> contacts = ContactData.GetAll(); 
+
+            if (contacts.Count == 0)
+            {
+               ContactData contactToGroup = new ContactData("newf", "newn");
+                Create(contactToGroup);
+            }
+
+            return this;
         }
     }
 }

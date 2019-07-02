@@ -16,7 +16,9 @@ namespace WebAddressbookTests
             {
             Name = name;
              }
-        
+
+  
+
         public GroupData()
         {
           //конструктор для сериалайзера 
@@ -84,5 +86,7 @@ namespace WebAddressbookTests
                 
             }
         }
+
+
     }
 }
