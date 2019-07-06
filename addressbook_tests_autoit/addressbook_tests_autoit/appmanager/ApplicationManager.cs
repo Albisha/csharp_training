@@ -22,6 +22,7 @@ namespace addressbook_tests_autoit
             groupHelper = new GroupHelper(this);
         }
 
+
         public void Stop()
         {
             aux.ControlClick(Wintitle,"", "WindowsForms10.BUTTON.app.0.2c908d510");

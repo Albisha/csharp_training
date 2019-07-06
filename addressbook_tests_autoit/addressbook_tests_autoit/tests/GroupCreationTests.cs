@@ -1,5 +1,7 @@
 using NUnit.Framework;
 using System.Collections.Generic;
+using System;
+
 
 namespace addressbook_tests_autoit
 {   [TestFixture]
@@ -18,11 +20,9 @@ namespace addressbook_tests_autoit
             };
 
             app.Groups.Add(newGroup);
-
             List<GroupData> newGroups = app.Groups.GetGroupList();
-
             oldGroups.Add(newGroup);
-
+            oldGroups = app.Groups.GetGroupList();
             oldGroups.Sort();
             newGroups.Sort();
             Assert.AreEqual(oldGroups, newGroups);
